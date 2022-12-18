@@ -147,63 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 35),
-                        const Center(
-                          child: Text(
-                            '- Or Sign In with -',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SecondScreen()));
-                              },
-                              child: Container(
-                                width: 60,
-                                height: 60,
-                                padding: const EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: Colors.white38,
-                                ),
-                                child: Image.asset(
-                                  'image/google.png',
-                                  scale: 12,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 50),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SecondScreen()));
-                              },
-                              child: Container(
-                                width: 60,
-                                height: 60,
-                                padding: const EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: Colors.white38,
-                                ),
-                                child: Image.asset('image/facebook.png'),
-                              ),
-                            ),
-                          ],
-                        )
+                        const SizedBox(height: 35)
                       ],
                     ),
                   ),
