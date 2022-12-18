@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_olshop/services/auth.dart';
 import 'SecondScreen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -9,6 +10,17 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  var UsernameController = TextEditingController();
+  var PasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    UsernameController.dispose();
+    PasswordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -19,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
               width: double.infinity,
               height: MediaQuery.of(context).size.height / 3,
-              child: Image.asset(''),
+              child: Image.asset('image/halodek.jpg'),
             ),
             Expanded(
               child: Container(
@@ -51,15 +63,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(12),
                             color: Colors.black,
                           ),
-                          child: const TextField(
-                            style: TextStyle(color: Colors.white),
-                            decoration: InputDecoration(
+                          child: TextField(
+                            controller: UsernameController,
+                            style: const TextStyle(color: Colors.white),
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
                               prefixIcon: Icon(
-                                Icons.email,
+                                Icons.people,
                                 color: Colors.white,
                               ),
-                              hintText: 'Email',
+                              hintText: 'Username',
                               hintStyle: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -79,9 +92,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(12),
                             color: Colors.black,
                           ),
-                          child: const TextField(
-                            style: TextStyle(color: Colors.white),
-                            decoration: InputDecoration(
+                          child: TextField(
+                            controller: PasswordController,
+                            obscureText: true,
+                            style: const TextStyle(color: Colors.white),
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
                               prefixIcon: Icon(
                                 Icons.lock,
@@ -94,11 +109,23 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 35),
                         GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SecondScreen()));
+                          onTap: () async {
+                            var loggedInData = await AuthService().login({
+                              "username": UsernameController.text,
+                              "password": PasswordController.text
+                            });
+                            if (loggedInData['message'] != null) {
+                              final snackBar = SnackBar(
+                                  content: Text(loggedInData['message']),
+                                  backgroundColor: (Colors.red));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            } else {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SecondScreen()));
+                            }
                           },
                           child: Container(
                             decoration: BoxDecoration(
