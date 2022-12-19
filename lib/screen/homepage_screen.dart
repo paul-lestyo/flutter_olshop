@@ -49,24 +49,68 @@ class HomepageScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      CardCategory(context, 1, 'Lifting', Ionicons.barbell),
-                      CardCategory(
-                          context, 2, 'Bicycle', Icons.pedal_bike_sharp),
-                      CardCategory(context, 3, 'Sport Shoes',
-                          Icons.ice_skating_outlined),
-                      CardCategory(context, 4, 'Hiking', Icons.terrain_sharp),
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: CardCategory(
+                              context, 1, 'Lifting', Ionicons.barbell),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: CardCategory(
+                              context, 2, 'Bicycle', Icons.pedal_bike_sharp),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: CardCategory(
+                              context, 3, 'Shoes', Icons.ice_skating_outlined),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: CardCategory(
+                              context, 4, 'Hiking', Icons.terrain_sharp),
+                        ),
+                      ),
                     ],
                   ),
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      CardCategory(context, 5, 'Sport Shirt', Ionicons.shirt),
-                      CardCategory(
-                          context, 6, 'Water Sport', Icons.surfing_sharp),
-                      CardCategory(context, 7, 'Golf', Icons.golf_course_sharp),
-                      CardCategory(context, 8, 'Winter Sport',
-                          Icons.sports_hockey_sharp),
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child:
+                              CardCategory(context, 5, 'Shirt', Ionicons.shirt),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: CardCategory(
+                              context, 6, 'Water', Icons.surfing_sharp),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: CardCategory(
+                              context, 7, 'Golf', Icons.golf_course_sharp),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: CardCategory(
+                              context, 8, 'Winter', Icons.sports_hockey_sharp),
+                        ),
+                      ),
                     ],
                   ),
                 ],
