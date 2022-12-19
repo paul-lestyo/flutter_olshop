@@ -8,6 +8,7 @@ import 'package:flutter_olshop/screen/login_screen.dart';
 import 'package:flutter_olshop/screen/searchpage_screen.dart';
 import 'package:flutter_olshop/services/product.dart';
 import 'package:image_card/image_card.dart';
+import 'package:ionicons/ionicons.dart';
 
 class HomepageScreen extends StatelessWidget {
   const HomepageScreen({Key? key}) : super(key: key);
@@ -48,20 +49,24 @@ class HomepageScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      CardCategory(context, 1),
-                      CardCategory(context, 2),
-                      CardCategory(context, 3),
-                      CardCategory(context, 4),
+                      CardCategory(context, 1, 'Lifting', Ionicons.barbell),
+                      CardCategory(
+                          context, 2, 'Bicycle', Icons.pedal_bike_sharp),
+                      CardCategory(context, 3, 'Sport Shoes',
+                          Icons.ice_skating_outlined),
+                      CardCategory(context, 4, 'Hiking', Icons.terrain_sharp),
                     ],
                   ),
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      CardCategory(context, 5),
-                      CardCategory(context, 6),
-                      CardCategory(context, 7),
-                      CardCategory(context, 8),
+                      CardCategory(context, 5, 'Sport Shirt', Ionicons.shirt),
+                      CardCategory(
+                          context, 6, 'Water Sport', Icons.surfing_sharp),
+                      CardCategory(context, 7, 'Golf', Icons.golf_course_sharp),
+                      CardCategory(context, 8, 'Winter Sport',
+                          Icons.sports_hockey_sharp),
                     ],
                   ),
                 ],
@@ -176,7 +181,8 @@ class HomepageScreen extends StatelessWidget {
     );
   }
 
-  GestureDetector CardCategory(BuildContext context, int category_id) {
+  GestureDetector CardCategory(
+      BuildContext context, int category_id, String name, IconData icon) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -193,10 +199,10 @@ class HomepageScreen extends StatelessWidget {
         child: Column(
           children: [
             Icon(
-              Icons.cyclone,
+              icon,
               size: 30,
             ),
-            Text("Lifting")
+            Text(name)
           ],
         ),
       ),
