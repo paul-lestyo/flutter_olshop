@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_olshop/screen/login_screen.dart';
+import 'package:flutter_olshop/services/product.dart';
 import 'package:image_card/image_card.dart';
 
 class HomepageScreen extends StatelessWidget {
@@ -6,6 +8,11 @@ class HomepageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<List<dynamic>> _fecthDataProducts() async {
+      var result = await ProductService().getProduct();
+      return result;
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -35,132 +42,20 @@ class HomepageScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Color(0xffE7F3F9),
-                            borderRadius: BorderRadius.circular(15)),
-                        padding: EdgeInsets.all(15),
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.cyclone,
-                              size: 30,
-                            ),
-                            Text("Lifting")
-                          ],
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Color(0xffE7F3F9),
-                            borderRadius: BorderRadius.circular(15)),
-                        padding: EdgeInsets.all(15),
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.cyclone,
-                              size: 30,
-                            ),
-                            Text("Lifting")
-                          ],
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Color(0xffE7F3F9),
-                            borderRadius: BorderRadius.circular(15)),
-                        padding: EdgeInsets.all(15),
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.cyclone,
-                              size: 30,
-                            ),
-                            Text("Lifting")
-                          ],
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Color(0xffE7F3F9),
-                            borderRadius: BorderRadius.circular(15)),
-                        padding: EdgeInsets.all(15),
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.cyclone,
-                              size: 30,
-                            ),
-                            Text("Lifting")
-                          ],
-                        ),
-                      ),
+                      CardCategory(context),
+                      CardCategory(context),
+                      CardCategory(context),
+                      CardCategory(context),
                     ],
                   ),
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Color(0xffE7F3F9),
-                            borderRadius: BorderRadius.circular(15)),
-                        padding: EdgeInsets.all(15),
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.cyclone,
-                              size: 30,
-                            ),
-                            Text("Lifting")
-                          ],
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Color(0xffE7F3F9),
-                            borderRadius: BorderRadius.circular(15)),
-                        padding: EdgeInsets.all(15),
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.cyclone,
-                              size: 30,
-                            ),
-                            Text("Lifting")
-                          ],
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Color(0xffE7F3F9),
-                            borderRadius: BorderRadius.circular(15)),
-                        padding: EdgeInsets.all(15),
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.cyclone,
-                              size: 30,
-                            ),
-                            Text("Lifting")
-                          ],
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Color(0xffE7F3F9),
-                            borderRadius: BorderRadius.circular(15)),
-                        padding: EdgeInsets.all(15),
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.cyclone,
-                              size: 30,
-                            ),
-                            Text("Lifting")
-                          ],
-                        ),
-                      ),
+                      CardCategory(context),
+                      CardCategory(context),
+                      CardCategory(context),
+                      CardCategory(context),
                     ],
                   ),
                 ],
@@ -175,152 +70,118 @@ class HomepageScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      FillImageCard(
-                        color: Color(0xff00689D),
-                        width: 190,
-                        heightImage: 140,
-                        imageProvider: AssetImage('image/halodek.jpg'),
-                        // tags: [_tag('Category', () {}), _tag('Product', () {})],
-                        title: Text(
-                          "Toko Sejahtera",
-                          style: TextStyle(color: Color(0xffB7B7B7)),
-                        ),
-                        description: Column(children: [
-                          Container(
-                            child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                'Barbel 5 Kilogram',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(top: 5),
-                            child: Align(
-                              alignment: Alignment.topRight,
-                              child: Text(
-                                'Rp 80.000',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          )
-                        ]),
-                      ),
-                      FillImageCard(
-                        color: Color(0xff00689D),
-                        width: 190,
-                        heightImage: 140,
-                        imageProvider: AssetImage('image/halodek.jpg'),
-                        // tags: [_tag('Category', () {}), _tag('Product', () {})],
-                        title: Text(
-                          "Toko Sejahtera",
-                          style: TextStyle(color: Color(0xffB7B7B7)),
-                        ),
-                        description: Column(children: [
-                          Container(
-                            child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                'Barbel 5 Kilogram',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(top: 5),
-                            child: Align(
-                              alignment: Alignment.topRight,
-                              child: Text(
-                                'Rp 80.000',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          )
-                        ]),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      FillImageCard(
-                        color: Color(0xff00689D),
-                        width: 190,
-                        heightImage: 140,
-                        imageProvider: AssetImage('image/halodek.jpg'),
-                        // tags: [_tag('Category', () {}), _tag('Product', () {})],
-                        title: Text(
-                          "Toko Sejahtera",
-                          style: TextStyle(color: Color(0xffB7B7B7)),
-                        ),
-                        description: Column(children: [
-                          Container(
-                            child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                'Barbel 5 Kilogram',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(top: 5),
-                            child: Align(
-                              alignment: Alignment.topRight,
-                              child: Text(
-                                'Rp 80.000',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          )
-                        ]),
-                      ),
-                      FillImageCard(
-                        color: Color(0xff00689D),
-                        width: 190,
-                        heightImage: 140,
-                        imageProvider: AssetImage('image/halodek.jpg'),
-                        // tags: [_tag('Category', () {}), _tag('Product', () {})],
-                        title: Text(
-                          "Toko Sejahtera",
-                          style: TextStyle(color: Color(0xffB7B7B7)),
-                        ),
-                        description: Column(children: [
-                          Container(
-                            child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                'Barbel 5 Kilogram',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(top: 5),
-                            child: Align(
-                              alignment: Alignment.topRight,
-                              child: Text(
-                                'Rp 80.000',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          )
-                        ]),
-                      ),
-                    ],
-                  )
-                ],
+              Container(
+                child: FutureBuilder<List<dynamic>>(
+                  future: _fecthDataProducts(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData) {
+                      return GridView.builder(
+                        padding: EdgeInsets.all(5),
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2),
+                        itemBuilder: (_, index) =>
+                            CardProduct(context, snapshot.data[index]),
+                        itemCount: snapshot.data.length,
+                      );
+                    } else {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  },
+                ),
               ),
-              SizedBox(height: 50),
+              // Column(
+              //   children: [
+              //     Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //       children: [
+              //         CardProduct(context),
+              //         CardProduct(context),
+              //       ],
+              //     ),
+              //     SizedBox(height: 10),
+              //     Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //       children: [
+              //         CardProduct(context),
+              //         CardProduct(context),
+              //       ],
+              //     )
+              //   ],
+              // ),
+              // SizedBox(height: 50),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Card CardProduct(BuildContext context, data) {
+    print(data);
+    return Card(
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => LoginScreen2()));
+        },
+        child: FillImageCard(
+          color: Color(0xff00689D),
+          width: 200,
+          heightImage: 110,
+          imageProvider: Image.network(data['img_path']).image,
+          // tags: [_tag('Category', () {}), _tag('Product', () {})],
+          title: Text(
+            data['name'].replaceRange(10, data['name'].length, '...').trim(),
+            style: TextStyle(color: Color(0xffB7B7B7), fontSize: 12),
+          ),
+          description: Column(children: [
+            Container(
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  data['name']
+                      .replaceRange(7, data['name'].length, '...')
+                      .trim(),
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: 5),
+              child: Align(
+                alignment: Alignment.topRight,
+                child: Text(
+                  data['price'],
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            )
+          ]),
+        ),
+      ),
+    );
+  }
+
+  GestureDetector CardCategory(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LoginScreen2()));
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            color: Color(0xffE7F3F9), borderRadius: BorderRadius.circular(15)),
+        padding: EdgeInsets.all(15),
+        child: Column(
+          children: [
+            Icon(
+              Icons.cyclone,
+              size: 30,
+            ),
+            Text("Lifting")
+          ],
         ),
       ),
     );
