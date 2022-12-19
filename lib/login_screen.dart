@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_olshop/screen/homepage_screen.dart';
+import 'package:flutter_olshop/services/auth.dart';
 import 'SecondScreen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -9,6 +11,17 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  var UsernameController = TextEditingController();
+  var PasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    UsernameController.dispose();
+    PasswordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -19,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
               width: double.infinity,
               height: MediaQuery.of(context).size.height / 3,
-              child: Image.asset(''),
+              child: Image.asset('image/halodek.jpg'),
             ),
             Expanded(
               child: Container(
@@ -51,15 +64,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(12),
                             color: Colors.black,
                           ),
-                          child: const TextField(
-                            style: TextStyle(color: Colors.white),
-                            decoration: InputDecoration(
+                          child: TextField(
+                            controller: UsernameController,
+                            style: const TextStyle(color: Colors.white),
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
                               prefixIcon: Icon(
-                                Icons.email,
+                                Icons.people,
                                 color: Colors.white,
                               ),
-                              hintText: 'Email',
+                              hintText: 'Username',
                               hintStyle: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -79,9 +93,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(12),
                             color: Colors.black,
                           ),
-                          child: const TextField(
-                            style: TextStyle(color: Colors.white),
-                            decoration: InputDecoration(
+                          child: TextField(
+                            controller: PasswordController,
+                            obscureText: true,
+                            style: const TextStyle(color: Colors.white),
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
                               prefixIcon: Icon(
                                 Icons.lock,
@@ -94,11 +110,23 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 35),
                         GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SecondScreen()));
+                          onTap: () async {
+                            var loggedInData = await AuthService().login({
+                              "username": UsernameController.text,
+                              "password": PasswordController.text
+                            });
+                            if (loggedInData['message'] != null) {
+                              final snackBar = SnackBar(
+                                  content: Text(loggedInData['message']),
+                                  backgroundColor: (Colors.red));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            } else {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomepageScreen()));
+                            }
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -120,63 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 35),
-                        const Center(
-                          child: Text(
-                            '- Or Sign In with -',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SecondScreen()));
-                              },
-                              child: Container(
-                                width: 60,
-                                height: 60,
-                                padding: const EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: Colors.white38,
-                                ),
-                                child: Image.asset(
-                                  'image/google.png',
-                                  scale: 12,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 50),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SecondScreen()));
-                              },
-                              child: Container(
-                                width: 60,
-                                height: 60,
-                                padding: const EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: Colors.white38,
-                                ),
-                                child: Image.asset('image/facebook.png'),
-                              ),
-                            ),
-                          ],
-                        )
+                        const SizedBox(height: 35)
                       ],
                     ),
                   ),
