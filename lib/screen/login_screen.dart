@@ -34,6 +34,7 @@ class LoginScreen2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlutterLogin(
+      loginAfterSignUp: false,
       hideForgotPasswordButton: true,
       userValidator: (value) {
         if (value == null || value.isEmpty) {
