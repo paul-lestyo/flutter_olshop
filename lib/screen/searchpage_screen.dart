@@ -1,77 +1,43 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_olshop/profile.dart';
-import 'package:flutter_olshop/screen/category_product_screen.dart';
 import 'package:flutter_olshop/screen/detail_product_screen.dart';
-import 'package:flutter_olshop/screen/login_screen.dart';
-import 'package:flutter_olshop/screen/searchpage_screen.dart';
 import 'package:flutter_olshop/services/product.dart';
 import 'package:image_card/image_card.dart';
 
-class HomepageScreen extends StatelessWidget {
-  const HomepageScreen({Key? key}) : super(key: key);
+class SearchpageScreen extends StatelessWidget {
+  const SearchpageScreen({required this.searchInput, Key? key})
+      : super(key: key);
+
+  final dynamic searchInput;
 
   @override
   Widget build(BuildContext context) {
     Future<List<dynamic>> _fecthDataProducts() async {
-      var result = await ProductService().getProduct();
+      var result = await ProductService().searchProduct(searchInput);
       return result;
     }
 
     return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Color(0xff002C42),
+        ),
+        backgroundColor: Color(0xffE7F3F9),
+        title: Text(
+          "Search Product",
+          style: TextStyle(color: Color(0xff002C42)),
+        ),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
             children: [
               Container(
-                decoration: BoxDecoration(
-                    border: Border(
-                  bottom: BorderSide(
-                    color: Colors.black,
-                  ),
-                )),
-                child: SearchInput(),
-              ),
-              Container(
                 padding: EdgeInsets.all(10),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Kategori',
-                    style: TextStyle(fontSize: 16, color: Color(0xff00689D)),
-                  ),
-                ),
-              ),
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      CardCategory(context, 1),
-                      CardCategory(context, 2),
-                      CardCategory(context, 3),
-                      CardCategory(context, 4),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      CardCategory(context, 5),
-                      CardCategory(context, 6),
-                      CardCategory(context, 7),
-                      CardCategory(context, 8),
-                    ],
-                  ),
-                ],
-              ),
-              Container(
-                padding: EdgeInsets.all(10),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Produk Terbaru',
+                    'Produk yang Dicari...',
                     style: TextStyle(fontSize: 16, color: Color(0xff00689D)),
                   ),
                 ),
@@ -100,29 +66,6 @@ class HomepageScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        onTap: (value) {
-          if (value == 2) {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ProfileScreen()));
-          }
-        },
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            label: 'Cart',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined),
-            label: 'Account',
-          ),
-        ],
       ),
     );
   }
@@ -175,33 +118,6 @@ class HomepageScreen extends StatelessWidget {
       ),
     );
   }
-
-  GestureDetector CardCategory(BuildContext context, int category_id) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => CategoryProductpageScreen(
-                      searchInput: category_id,
-                    )));
-      },
-      child: Container(
-        decoration: BoxDecoration(
-            color: Color(0xffE7F3F9), borderRadius: BorderRadius.circular(15)),
-        padding: EdgeInsets.all(15),
-        child: Column(
-          children: [
-            Icon(
-              Icons.cyclone,
-              size: 30,
-            ),
-            Text("Lifting")
-          ],
-        ),
-      ),
-    );
-  }
 }
 
 class SearchInput extends StatefulWidget {
@@ -210,8 +126,6 @@ class SearchInput extends StatefulWidget {
 }
 
 class _SearchInputState extends State<SearchInput> {
-  final searchController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -227,7 +141,6 @@ class _SearchInputState extends State<SearchInput> {
                 child: SizedBox(
                   height: 45,
                   child: TextField(
-                    controller: searchController,
                     cursorColor: Colors.grey,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.only(left: 10),
@@ -243,29 +156,19 @@ class _SearchInputState extends State<SearchInput> {
                 ),
               ),
               Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SearchpageScreen(
-                                  searchInput: searchController.text,
-                                )));
-                  },
+                child: Container(
+                  margin: EdgeInsets.all(10),
+                  padding: EdgeInsets.only(top: 10, bottom: 10),
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(15)),
                   child: Container(
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.only(top: 10, bottom: 10),
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(15)),
-                    child: Container(
-                        child: Icon(
-                      Icons.search,
-                      color: Colors.white,
-                      size: 24,
-                    )),
-                    width: 25,
-                  ),
+                      child: Icon(
+                    Icons.search,
+                    color: Colors.white,
+                    size: 24,
+                  )),
+                  width: 25,
                 ),
               ),
             ],

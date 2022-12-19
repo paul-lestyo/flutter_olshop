@@ -9,4 +9,22 @@ class ProductService {
 
     return productData;
   }
+
+  Future<dynamic> searchProduct(String name) async {
+    NetworkHelper networkHelper = NetworkHelper(
+      url: 'http://ppb.paulus-lestyo.my.id/product?search=${name}',
+    );
+    var productData = await networkHelper.getData();
+
+    return productData;
+  }
+
+  Future<dynamic> searchProductByCategory(int id) async {
+    NetworkHelper networkHelper = NetworkHelper(
+      url: 'http://ppb.paulus-lestyo.my.id/product?category_id=${id}',
+    );
+    var productData = await networkHelper.getData();
+
+    return productData;
+  }
 }

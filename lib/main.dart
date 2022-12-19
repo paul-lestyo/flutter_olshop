@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_olshop/profile.dart';
+import 'package:flutter_olshop/screen/login_screen.dart';
 import 'package:flutter_olshop/screen/splash_screen.dart';
 
 void main() {
